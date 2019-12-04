@@ -1,0 +1,103 @@
+{% extends 'web_save_app/base.html' %}
+{% load my_filters %}
+{% load mathfilters %}
+{% block page_header %}
+	<h1>Saver Profile</h1>
+	<a class="btn btn-primary" href="{% url 'web_save_app:saver_transaction' %}" role="button">Add Transaction</a>
+<a class="btn btn-primary" href="{% url 'web_save_app:new_goal' %}" role="button">Add Goal</a>
+<a class="btn btn-primary" href="{% url 'web_save_app:saver_summary'%}" role="button">Transaction Log</a>
+{% endblock page_header %}
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+
+
+{% block content %}
+<div id="container">
+  
+  	<h4>Goal Saved</h4>
+  	<table class="table table-sm">
+  <thead>
+    <tr>
+      <th scope="col">Goal</th>
+      <th scope="col">Saved</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+  	{% for key, value in goal_summary.items %}
+    <tr>
+   	  <th scope="row">{{key}}</th>
+      <td>{{value|abs|currency}}</td>
+     
+    </tr>
+    {%endfor%}
+	
+  </tbody>
+</table>
+
+  </div>
+ 
+  <div id="right">
+  	
+  	<h4>Amount to Save</h4>
+  	<table class="table table-sm">
+  <thead>
+    <tr>
+      <th scope="col">Goal Name</th>
+      <th scope="col">Goal Amount</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+  	{% for key, value in goal_amount_list.items %}
+    <tr>
+   	  <th scope="row">{{key}}</th>
+      <td>{{value|abs|currency}}</td>
+     
+    </tr>
+    {%endfor%}
+	
+  </tbody>
+</table>
+
+  </div>
+</div>
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+
+  	<h4>Account Status</h4>
+
+<table class="table table-sm">
+	<thead>
+	<tr>
+		<th scope = "col">Account Balance</th>
+		<th scope = "col">Giving</th>
+		<th scope = "col">Spent</th>
+		<th scope = "col">Goals</th>
+		
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+			<td>{{account_balance|currency}}</td>
+			<td>{{total_given|abs|currency}}</td>
+			<td>{{total_spent|abs|currency}}</td>
+			<td>{{total_goal|abs|currency}}</td>
+			
+
+		</tr>
+	
+	</tbody>
+</table>
+
+
+
+{% endblock content %}

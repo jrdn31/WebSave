@@ -1,0 +1,52 @@
+{% extends 'web_save_app/base.html' %}
+{% load my_filters %}
+{% block page_header %}
+	<h1>Banker Overview</h1>
+	<a class="btn btn-primary" href="{% url 'web_save_app:new_transaction' %}" role="button">Add Transaction</a>
+{% endblock page_header %}
+
+{% block content %}
+<div>
+<h4>Saver Account Balances</h4>
+  	<table class="table table-sm">
+  <thead>
+    <tr>
+      <th scope="col">Saver</th>
+      <th scope="col">Account Balance</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+  	{% for key, value in user_balance.items %}
+  	
+
+    <tr>
+   	  <th scope="row">{{key}}</th>
+      <td>{{value|currency}}</td>
+    
+      	
+
+    </tr>
+    {%endfor%}
+
+ 
+
+  </tbody>
+</table>
+</div>
+&nbsp;
+&nbsp;
+{% for sv in saver %}
+<a class="btn btn-primary"
+	style = "margin:10px;"
+	href="{% url 'web_save_app:saver_info' sv.id %}" 
+      		role="button">View  <b>{{sv.username}}</b></a></td>
+{%endfor%}
+
+
+	
+
+	
+	
+
+{% endblock content %}

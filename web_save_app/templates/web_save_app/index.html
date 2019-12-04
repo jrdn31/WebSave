@@ -1,0 +1,20 @@
+{% extends 'web_save_app/base.html' %}
+{% block page_header %}
+	<div class = "jumbotron">
+		<h1 class="display-3">Welcome to your saver app!</h1>
+
+	<p class="lead">This web application will make it easier to track, save
+	and manage your money! Login to begin saving today!</p>
+{% if user.is_authenticated %}
+	{% if group == 'banker' %}
+	<a class="btn btn-primary" href="{% url 'web_save_app:banker' %}" role="button">To Banker&raquo;</a>
+	{% else %}
+	<a class="btn btn-primary" href="{% url 'web_save_app:saver' %}" role="button">To Saver&raquo;</a>
+	{% endif %}
+{% else %}
+<a class="btn btn-lg btn-primary" href="{% url 'web_save_app:login'%}"
+role="button">Sign In &raquo;</a> <!-- &raquo is '>>' -->
+{% endif %}
+</div>
+
+{% endblock page_header %}

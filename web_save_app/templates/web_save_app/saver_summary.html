@@ -1,0 +1,39 @@
+{% extends 'web_save_app/base.html' %}
+{% load my_filters %}
+{% block page_header %}
+	<h1>Saver Summary</h1>
+	<a class="btn btn-primary" href="{% url 'web_save_app:saver_transaction' %}" role="button">Add Transaction</a>
+	<a class="btn btn-primary" href="{% url 'web_save_app:new_goal' %}" role="button">Add Goal</a>
+	<a class="btn btn-primary" href="{% url 'web_save_app:saver' %}" role="button">Back to Saver</a>
+{% endblock page_header %}
+
+{% block content %}
+<table class="table">
+	<thead>
+	<tr>
+		<th scope = "col">Date</th>
+
+		<th scope = "col">Amount</th>
+		<th scope = "col">Goal</th>
+		<th scope = "col">Category</th>
+		<th scope = "col">Note</th>
+	</tr>
+	</thead>
+	<tbody>
+	{% for transaction in transactions %}
+		<tr>
+			<td>{{transaction.date_added|date:'M d, Y H:i'}}</td>
+			<td>{{transaction.amount|currency}}</td>
+			<td>{{transaction.goal_id.name}}</td>
+			<td>{{transaction.category}}</td>
+			<td>{{transaction.note|linebreaks }}</td>
+
+		</tr>
+	{% empty %}
+	<p> No transactions have been added</p>
+	{% endfor %}
+	</tbody>
+</table>
+
+
+{% endblock content %}

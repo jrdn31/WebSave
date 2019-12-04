@@ -1,0 +1,38 @@
+{% extends 'web_save_app/base.html' %}
+{% load my_filters %}
+{% block page_header %}
+	<h1>Add New Goal</h1>
+	<a class="btn btn-primary" href="{% url 'web_save_app:saver' %}" role="button">Back to Saver</a>
+{% endblock page_header %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+	<form action ="{% url 'web_save_app:new_goal' %}" method='post'>
+		{% csrf_token %}
+		{{ form|crispy }}
+		<button type = "submit" class="btn btn-success">Save Goal</button>
+	</form>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+<div>
+<h3> Current Goals</h3>
+<table>
+<table class="table table-sm">
+	<thead>
+	<tr>
+		<th scope = "col">Goal Name</th>
+		<th scope = "col">Amount of Goal</th>
+		<th scope = "col">Edit Goal</th>
+		
+	</tr>
+	</thead>
+	<tbody>
+	{% for goal in goals %}
+		<tr>
+			<td>{{goal.name}}</td>
+			<td>{{goal.goal_amount|currency}}</td>
+			<td><a class="btn btn-primary" href="{% url 'web_save_app:edit_goal' goal.id %}" role="button">Edit Me</a></td>
+	{% endfor %}
+	</div>
+{% endblock content %}
